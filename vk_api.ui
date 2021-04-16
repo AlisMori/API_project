@@ -50,14 +50,14 @@
     <item row="0" column="0">
      <widget class="QLabel" name="label_2">
       <property name="text">
-       <string>Получить&quot;Acess Token&quot; для VK API</string>
+       <string>Включение вечного онлайна</string>
       </property>
      </widget>
     </item>
     <item row="1" column="0">
      <widget class="QLabel" name="label_3">
       <property name="text">
-       <string>Проверить «Access Token» на валидность</string>
+       <string>Добавление аккаунта в бан</string>
       </property>
      </widget>
     </item>
@@ -71,7 +71,7 @@
     <item row="2" column="0">
      <widget class="QLabel" name="label_4">
       <property name="text">
-       <string>Просмотреть диалоги через «Access Token»</string>
+       <string>Вывод списка друзей</string>
       </property>
      </widget>
     </item>
