@@ -31,10 +31,10 @@ class Vk(QWidget):
         self.Main_vk.clicked.connect(self.return_main)
         self.TG_vk.clicked.connect(self.return_tg)
         for i in range(1, 7):
-            getattr(self, f'function{i}').clicked.connect(lambda: function(i))
+            getattr(self, f'function{i}').clicked.connect(lambda: self.functions(i))
 
     def functions(self, num):
-        self.func = Functions(vk, num)
+        self.func = Functions('vk', num)
         self.func.show()
         self.close()
 
@@ -73,52 +73,67 @@ class Functions(QWidget):
         uic.loadUi('func.ui', self)
         self.site = site
         self.func = function
+        self.get_result.clicked.connect(self.result)
+
+    def result(self):
+        self.token_text = self.token.text()
+        self.owner_id_text = self.owner_id.text()
+        self.user_id_text = self.user_id.text()
         if self.site == 'vk':
             if self.func == 1:
-                self.text = eternal_online(self.token.getText())
+                self.text = eternal_online(self.token_text)
                 self.print.setText(self.text)
             if self.func == 2:
-                self.text == account_ban(self.token.getText(), self.owner_id.getText(), self.user_id.getText())
+                self.text == account_ban(self.token_text, self.owner_id_text, self.user_id_text)
                 self.print.setText(self.text)
             if self.func == 3:
-                self.text = friends(self.token.getText(), self.owner_id.getText())
+                self.text = friends(self.token_text, self.owner_id_text)
                 self.print.setText(self.text)
 
 
 def eternal_online(token):
-    data = {'access_token': token, 'v': '5.130'}
-    url = 'https://api.vk.com/method/account.setOnline?'
-    return "Вечный онлайн включен"
-    while True:
-        requests.get(url, data)
-        time.sleep(100)
+    try:
+        data = {'access_token': token, 'v': '5.130'}
+        url = 'https://api.vk.com/method/account.setOnline?'
+        return "Вечный онлайн включен"
+        while True:
+            requests.get(url, data)
+            time.sleep(100)
+    except Exception:
+        return 'Error'
 
 
 def account_ban(token, owner_id, user_id):
-    data = {'owner_id': owner_id, 'access_token': token, 'v': '5.130'}
-    url = 'https://api.vk.com/method/account.ban'
-    requests.get(url, data)
+    try:
+        data = {'owner_id': owner_id, 'access_token': token, 'v': '5.130'}
+        url = 'https://api.vk.com/method/account.ban'
+        requests.get(url, data)
 
-    data1 = {'access_token': token, 'user_ids': user_id, 'v': '5.130'}
-    url1 = 'https://api.vk.com/method/users.get'
-    response = requests.get(url1, data1)
-    first_name = response.json()['response'][0]['first_name']
-    second_name = response.json()['response'][0]['last_name']
+        data1 = {'access_token': token, 'user_ids': user_id, 'v': '5.130'}
+        url1 = 'https://api.vk.com/method/users.get'
+        response = requests.get(url1, data1)
+        first_name = response.json()['response'][0]['first_name']
+        second_name = response.json()['response'][0]['last_name']
 
-    return first_name + ' ' + second_name + " был(а) заблокирован(а)"
+        return first_name + ' ' + second_name + " был(а) заблокирован(а)"
+    except Exception:
+        return 'Error'
 
 
 def friends(token, owner_id):
-    data = {'user_id': owner_id, 'order': 'name', 'count': 5000, 'fields': 'city', 'access_token': token,
-            'v': '5.130'}  # вместо 123 добавить айди
-    url = 'https://api.vk.com/method/friends.get'
-    response = requests.get(url, data)
-    count = response.json()['response']['count']
-    ls = []
-    for i in range(count):
-        ls.append(response.json()['response']['items'][i]['first_name'] + ' ' + response.json()['response']['items']
-        [i]['last_name'])
-        return '\n'.join(ls)
+    try:
+        data = {'user_id': owner_id, 'order': 'name', 'count': 5000, 'fields': 'city', 'access_token': token,
+                'v': '5.130'}  # вместо 123 добавить айди
+        url = 'https://api.vk.com/method/friends.get'
+        response = requests.get(url, data)
+        count = response.json()['response']['count']
+        ls = []
+        for i in range(count):
+            ls.append(response.json()['response']['items'][i]['first_name'] + ' ' + response.json()['response']['items']
+            [i]['last_name'])
+            return '\n'.join(ls)
+    except Exception:
+        return 'Error'
 
 
 def excepthook(exc_type, exc_value, exc_tb):

@@ -110,7 +110,7 @@
     <number>-1</number>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="get_result">
    <property name="geometry">
     <rect>
      <x>20</x>
