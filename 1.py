@@ -36,7 +36,6 @@ class Vk(QWidget):
     def functions(self, num):
         self.func = Functions('vk', num)
         self.func.show()
-        self.close()
 
     def return_main(self):
         self.main = Main()
@@ -73,6 +72,7 @@ class Functions(QWidget):
         uic.loadUi('func.ui', self)
         self.site = site
         self.func = function
+        self.print.setReadOnly(True)
         self.get_result.clicked.connect(self.result)
 
     def result(self):
