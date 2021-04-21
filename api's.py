@@ -1,7 +1,7 @@
 import requests
 import time
 
-token = '123'  #тут токен
+token = '123'  # тут токен
 
 
 def eternal_online():
@@ -39,6 +39,24 @@ def friends():
             'last_name'])
 
 
+def status_get():
+    # Сюда добавить строку с вводом айди пользователя
+    data = {'user_id': '123', 'access_token': token, 'v': '5.130'}  # вместо 123 добавить айди
+    url = 'https://api.vk.com/method/status.get'
+    response = requests.get(url, data)
+    print('Статус данного пользователя:', response.json()['response']['text'])
+
+
+def status_set():
+    your_text = '123123123'
+    data = {'text': your_text, 'access_token': token, 'v': '5.130'}
+    url = 'https://api.vk.com/method/status.set'
+    requests.get(url, data)
+    print('Ваш статус успешно изменен')
+
+
+status_set()
+status_get()
 friends()
 account_ban()
 eternal_online()
