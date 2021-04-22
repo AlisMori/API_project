@@ -30,8 +30,8 @@ class Vk(QWidget):
         uic.loadUi('vk_api.ui', self)
         self.Main_vk.clicked.connect(self.return_main)
         self.TG_vk.clicked.connect(self.return_tg)
-        for i in range(1, 7):
-            getattr(self, f'function{i}').clicked.connect(lambda: self.functions(i))
+        self.nums.addItems(['1', '2', '3'])
+        self.function.clicked.connect(lambda: self.functions(self.nums.currentText()))
 
     def functions(self, num):
         self.func = Functions('vk', num)
@@ -80,15 +80,12 @@ class Functions(QWidget):
         self.owner_id_text = self.owner_id.text()
         self.user_id_text = self.user_id.text()
         if self.site == 'vk':
-            if self.func == 1:
-                self.text = eternal_online(self.token_text)
-                self.print.setText(self.text)
-            if self.func == 2:
-                self.text == account_ban(self.token_text, self.owner_id_text, self.user_id_text)
-                self.print.setText(self.text)
-            if self.func == 3:
-                self.text = friends(self.token_text, self.owner_id_text)
-                self.print.setText(self.text)
+            if self.func == '1':
+                self.print.setText(eternal_online(self.token_text))
+            if self.func == '2':
+                self.print.setText(account_ban(self.token_text, self.owner_id_text, self.user_id_text))
+            if self.func == '3':
+                self.print.setText(friends(self.token_text, self.owner_id_text))
 
 
 def eternal_online(token):
