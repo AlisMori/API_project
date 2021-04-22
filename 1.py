@@ -83,7 +83,7 @@ class Functions(QWidget):
             if self.func == '1':
                 self.print.setText(eternal_online(self.token_text))
             if self.func == '2':
-                self.print.setText(account_ban(self.token_text, self.owner_id_text, self.user_id_text))
+                self.print.setText(account_ban(self.token_text, self.user_id_text))
             if self.func == '3':
                 self.print.setText(friends(self.token_text, self.owner_id_text))
 
@@ -92,17 +92,17 @@ def eternal_online(token):
     try:
         data = {'access_token': token, 'v': '5.130'}
         url = 'https://api.vk.com/method/account.setOnline?'
-        return "Вечный онлайн включен"
         while True:
             requests.get(url, data)
-            time.sleep(100)
+            time.sleep(150)
+            return "Вечный онлайн включен"
     except Exception:
         return 'Error'
 
 
-def account_ban(token, owner_id, user_id):
+def account_ban(token, user_id):
     try:
-        data = {'owner_id': owner_id, 'access_token': token, 'v': '5.130'}
+        data = {'owner_id': user_id, 'access_token': token, 'v': '5.130'}
         url = 'https://api.vk.com/method/account.ban'
         requests.get(url, data)
 
@@ -128,7 +128,7 @@ def friends(token, owner_id):
         for i in range(count):
             ls.append(response.json()['response']['items'][i]['first_name'] + ' ' + response.json()['response']['items']
             [i]['last_name'])
-            return '\n'.join(ls)
+        return '\n'.join(ls)
     except Exception:
         return 'Error'
 
