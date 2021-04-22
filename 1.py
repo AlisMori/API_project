@@ -130,7 +130,7 @@ class Functions(QWidget):
             if self.func == '3':
                 self.print.setText(friends(self.token.text(), self.owner_id.text()))
             if self.func == '4':
-                self.print.setText(status_get(self.token.text(), self.user_id.id()))
+                self.print.setText(status_get(self.token.text(), self.user_id.text()))
             if self.func == '5':
                 self.print.setText(status_set(self.token.text(), self.status.text()))
         elif self.site == 'tg':
@@ -184,12 +184,12 @@ def friends(token, owner_id):
         return 'Error'
 
 
-def status_get(token, user_id):  # ошибка с QLineEdit
+def status_get(token, user_id):
     try:
         data = {'user_id': user_id, 'access_token': token, 'v': '5.130'}
         url = 'https://api.vk.com/method/status.get'
         response = requests.get(url, data)
-        return 'Статус данного пользователя:', response.json()['response']['text']
+        return 'Статус данного пользователя: ' + response.json()['response']['text']
     except Exception:
         return 'Error'
 
