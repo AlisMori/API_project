@@ -10,6 +10,7 @@ class Main(QMainWindow):
     def __init__(self):
         super().__init__()
         uic.loadUi('main_api.ui', self)
+        self.setFixedSize(317, 317)
         self.VK.clicked.connect(self.vk)
         self.TG.clicked.connect(self.tg)
 
@@ -28,6 +29,7 @@ class Vk(QWidget):
     def __init__(self):
         super().__init__()
         uic.loadUi('vk_api.ui', self)
+        self.setFixedSize(520, 275)
         self.Main_vk.clicked.connect(self.return_main)
         self.TG_vk.clicked.connect(self.return_tg)
         self.nums.addItems(['1', '2', '3', '4', '5'])
@@ -52,8 +54,15 @@ class Tg(QWidget):
     def __init__(self):
         super().__init__()
         uic.loadUi('tg_api.ui', self)
+        self.setFixedSize(520, 210)
         self.Main_tg.clicked.connect(self.return_main)
         self.VK_tg.clicked.connect(self.return_vk)
+        self.nums.addItems(['1', '2'])
+        self.function.clicked.connect(lambda: self.functions(self.nums.currentText()))
+
+    def functions(self, num):
+        self.func = Functions('tg', num)
+        self.func.show()
 
     def return_main(self):
         self.main = Main()
@@ -69,11 +78,12 @@ class Tg(QWidget):
 class Functions(QWidget):
     def __init__(self, site, function):
         super().__init__()
-        uic.loadUi('func.ui', self)
+        self.setFixedSize(400, 300)
         self.site = site
         self.func = function
-        self.print.setReadOnly(True)
         if self.site == 'vk':
+            uic.loadUi('func_vk.ui', self)
+            self.print.setReadOnly(True)
             if self.func == '1':
                 self.user_id.hide()
                 self.owner_id.hide()
@@ -100,6 +110,15 @@ class Functions(QWidget):
                 self.owner_id.hide()
                 self.label_2.hide()
                 self.label_3.hide()
+        elif self.site == 'tg':
+            uic.loadUi('func_tg.ui', self)
+            self.print.setReadOnly(True)
+            if self.func == '1':
+                self.user_id.hide()
+                self.label_3.hide()
+            if self.func == '2':
+                self.label.hide()
+                self.message.hide()
         self.get_result.clicked.connect(self.result)
 
     def result(self):
@@ -114,6 +133,11 @@ class Functions(QWidget):
                 self.print.setText(status_get(self.token.text(), self.user_id.id()))
             if self.func == '5':
                 self.print.setText(status_get(self.token.text(), self.status.text()))
+        elif self.site == 'tg':
+            if self.func == '1':
+                self.print.setText(send_messages(self.channel_id.text(), self.message.text()))
+            if self.func == '2':
+                self.print.setText(get_profile_photo(self.user_id.text(), self.channel_id.text()))
 
 
 def eternal_online(token):
@@ -162,17 +186,59 @@ def friends(token, owner_id):
 
 
 def status_get(token, user_id):
-    data = {'user_id': user_id, 'access_token': token, 'v': '5.130'}  # вместо 123 добавить айди
-    url = 'https://api.vk.com/method/status.get'
-    response = requests.get(url, data)
-    print('Статус данного пользователя:', response.json()['response']['text'])
+    try:
+        data = {'user_id': user_id, 'access_token': token, 'v': '5.130'}  # вместо 123 добавить айди
+        url = 'https://api.vk.com/method/status.get'
+        response = requests.get(url, data)
+        return 'Статус данного пользователя:', response.json()['response']['text']
+    except Exception:
+        return 'Error'
 
 
 def status_set(token, your_text):
-    data = {'text': your_text, 'access_token': token, 'v': '5.130'}
-    url = 'https://api.vk.com/method/status.set'
-    requests.get(url, data)
-    print('Ваш статус успешно изменен')
+    try:
+        data = {'text': your_text, 'access_token': token, 'v': '5.130'}
+        url = 'https://api.vk.com/method/status.set'
+        requests.get(url, data)
+        return 'Ваш статус успешно изменен'
+    except Exception:
+        return 'Error'
+
+
+token_bot = '1772905780:AAGmVZ4xZsprfuoLiOM_dwE5Yp06DZL8qfI'
+
+
+def send_messages(channel_id, text):
+    try:
+        url = "https://api.telegram.org/bot"
+        url += token_bot
+        method = url + "/sendMessage"
+        data = {"chat_id": channel_id, "text": text}
+        r = requests.post(method, data)
+        return "Ваше сообщение отправлено"
+    except Exception:
+        return 'Error'
+
+
+def get_profile_photo(user_id, channel_id):
+    try:
+        url = "https://api.telegram.org/bot"
+        url += token_bot
+        method = url + "/getUserProfilePhotos"
+        data = {"user_id": user_id}
+        r = requests.post(method, data)
+        print(r.json())
+        print("Фото получено")
+        file = r.json()['result']['photos'][0][0]['file_id']
+
+        url = "https://api.telegram.org/bot"
+        url += token_bot
+        method = url + "/sendPhoto"
+        data = {"chat_id": channel_id, "photo": file}
+        r = requests.post(method, data)
+        print("Вашsdfghdfghhfgdfdghhdfg")
+    except Exception:
+        return 'Error'
 
 
 def excepthook(exc_type, exc_value, exc_tb):
