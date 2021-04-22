@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>516</width>
-    <height>385</height>
+    <width>524</width>
+    <height>316</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -111,21 +111,14 @@
     <item>
      <widget class="QLabel" name="label_5">
       <property name="text">
-       <string>Получить&quot;Acess Token&quot; для VK API</string>
+       <string>4. Получение статуса пользователя</string>
       </property>
      </widget>
     </item>
     <item>
      <widget class="QLabel" name="label_6">
       <property name="text">
-       <string>Получить&quot;Acess Token&quot; для VK API</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLabel" name="label_7">
-      <property name="text">
-       <string>Получить&quot;Acess Token&quot; для VK API</string>
+       <string>5. Изменение статуса пользователя</string>
       </property>
      </widget>
     </item>

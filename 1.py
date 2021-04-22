@@ -30,7 +30,7 @@ class Vk(QWidget):
         uic.loadUi('vk_api.ui', self)
         self.Main_vk.clicked.connect(self.return_main)
         self.TG_vk.clicked.connect(self.return_tg)
-        self.nums.addItems(['1', '2', '3'])
+        self.nums.addItems(['1', '2', '3', '4', '5'])
         self.function.clicked.connect(lambda: self.functions(self.nums.currentText()))
 
     def functions(self, num):
@@ -73,19 +73,47 @@ class Functions(QWidget):
         self.site = site
         self.func = function
         self.print.setReadOnly(True)
+        if self.site == 'vk':
+            if self.func == '1':
+                self.user_id.hide()
+                self.owner_id.hide()
+                self.status.hide()
+                for i in range(2, 5):
+                    getattr(self, f'label_{i}').hide()
+            if self.func == '2':
+                self.owner_id.hide()
+                self.status.hide()
+                self.label_2.hide()
+                self.label_4.hide()
+            if self.func == '3':
+                self.user_id.hide()
+                self.status.hide()
+                self.label_3.hide()
+                self.label_4.hide()
+            if self.func == '4':
+                self.owner_id.hide()
+                self.status.hide()
+                self.label_2.hide()
+                self.label_4.hide()
+            if self.func == '5':
+                self.user_id.hide()
+                self.owner_id.hide()
+                self.label_2.hide()
+                self.label_3.hide()
         self.get_result.clicked.connect(self.result)
 
     def result(self):
-        self.token_text = self.token.text()
-        self.owner_id_text = self.owner_id.text()
-        self.user_id_text = self.user_id.text()
         if self.site == 'vk':
             if self.func == '1':
-                self.print.setText(eternal_online(self.token_text))
+                self.print.setText(eternal_online(self.token.text()))
             if self.func == '2':
-                self.print.setText(account_ban(self.token_text, self.user_id_text))
+                self.print.setText(account_ban(self.token.text(), self.user_id.text()))
             if self.func == '3':
-                self.print.setText(friends(self.token_text, self.owner_id_text))
+                self.print.setText(friends(self.token.text(), self.owner_id.text()))
+            if self.func == '4':
+                self.print.setText(status_get(self.token.text(), self.user_id.id()))
+            if self.func == '5':
+                self.print.setText(status_get(self.token.text(), self.status.text()))
 
 
 def eternal_online(token):
@@ -131,6 +159,20 @@ def friends(token, owner_id):
         return '\n'.join(ls)
     except Exception:
         return 'Error'
+
+
+def status_get(token, user_id):
+    data = {'user_id': user_id, 'access_token': token, 'v': '5.130'}  # вместо 123 добавить айди
+    url = 'https://api.vk.com/method/status.get'
+    response = requests.get(url, data)
+    print('Статус данного пользователя:', response.json()['response']['text'])
+
+
+def status_set(token, your_text):
+    data = {'text': your_text, 'access_token': token, 'v': '5.130'}
+    url = 'https://api.vk.com/method/status.set'
+    requests.get(url, data)
+    print('Ваш статус успешно изменен')
 
 
 def excepthook(exc_type, exc_value, exc_tb):
