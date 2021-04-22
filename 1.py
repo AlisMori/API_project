@@ -3,7 +3,7 @@ import traceback
 from PyQt5.QtWidgets import QMainWindow, QWidget, QApplication
 from PyQt5 import uic
 import requests
-import time
+from PyQt5.QtCore import QTimer
 
 
 class Main(QMainWindow):
@@ -132,7 +132,7 @@ class Functions(QWidget):
             if self.func == '4':
                 self.print.setText(status_get(self.token.text(), self.user_id.id()))
             if self.func == '5':
-                self.print.setText(status_get(self.token.text(), self.status.text()))
+                self.print.setText(status_set(self.token.text(), self.status.text()))
         elif self.site == 'tg':
             if self.func == '1':
                 self.print.setText(send_messages(self.channel_id.text(), self.message.text()))
@@ -140,13 +140,12 @@ class Functions(QWidget):
                 self.print.setText(get_profile_photo(self.user_id.text(), self.channel_id.text()))
 
 
-def eternal_online(token):
+def eternal_online(token):  # добавить остановку времени
     try:
         data = {'access_token': token, 'v': '5.130'}
         url = 'https://api.vk.com/method/account.setOnline?'
         while True:
             requests.get(url, data)
-            time.sleep(150)
             return "Вечный онлайн включен"
     except Exception:
         return 'Error'
@@ -172,7 +171,7 @@ def account_ban(token, user_id):
 def friends(token, owner_id):
     try:
         data = {'user_id': owner_id, 'order': 'name', 'count': 5000, 'fields': 'city', 'access_token': token,
-                'v': '5.130'}  # вместо 123 добавить айди
+                'v': '5.130'}
         url = 'https://api.vk.com/method/friends.get'
         response = requests.get(url, data)
         count = response.json()['response']['count']
@@ -185,9 +184,9 @@ def friends(token, owner_id):
         return 'Error'
 
 
-def status_get(token, user_id):
+def status_get(token, user_id):  # ошибка с QLineEdit
     try:
-        data = {'user_id': user_id, 'access_token': token, 'v': '5.130'}  # вместо 123 добавить айди
+        data = {'user_id': user_id, 'access_token': token, 'v': '5.130'}
         url = 'https://api.vk.com/method/status.get'
         response = requests.get(url, data)
         return 'Статус данного пользователя:', response.json()['response']['text']
@@ -214,7 +213,7 @@ def send_messages(channel_id, text):
         url += token_bot
         method = url + "/sendMessage"
         data = {"chat_id": channel_id, "text": text}
-        r = requests.post(method, data)
+        requests.post(method, data)
         return "Ваше сообщение отправлено"
     except Exception:
         return 'Error'
@@ -227,16 +226,14 @@ def get_profile_photo(user_id, channel_id):
         method = url + "/getUserProfilePhotos"
         data = {"user_id": user_id}
         r = requests.post(method, data)
-        print(r.json())
-        print("Фото получено")
         file = r.json()['result']['photos'][0][0]['file_id']
 
         url = "https://api.telegram.org/bot"
         url += token_bot
         method = url + "/sendPhoto"
         data = {"chat_id": channel_id, "photo": file}
-        r = requests.post(method, data)
-        print("Вашsdfghdfghhfgdfdghhdfg")
+        requests.post(method, data)
+        return 'Бот отправил вам фотографию, пожалуйста, проверьте телеграм'
     except Exception:
         return 'Error'
 
