@@ -30,6 +30,7 @@ class Vk(QWidget):  # Окно, в котором представлены api �
         super().__init__()
         uic.loadUi('vk_api.ui', self)
         self.setFixedSize(520, 275)
+        self.setWindowTitle('VK functions')
         self.Main_vk.clicked.connect(self.return_main)
         self.TG_vk.clicked.connect(self.return_tg)
         self.nums.addItems(['1', '2', '3', '4', '5'])
@@ -55,6 +56,7 @@ class Tg(QWidget):  # Окно, в котором представлены api �
         super().__init__()
         uic.loadUi('tg_api.ui', self)
         self.setFixedSize(520, 210)
+        self.setWindowTitle('TG functions')
         self.Main_tg.clicked.connect(self.return_main)
         self.VK_tg.clicked.connect(self.return_vk)
         self.nums.addItems(['1', '2'])
@@ -83,6 +85,7 @@ class Functions(QWidget):  # Окно, в котором происходят с
         self.func = function
         if self.site == 'vk':
             uic.loadUi('func_vk.ui', self)
+            self.setWindowTitle('VK functions')
             self.print.setReadOnly(True)
             if self.func == '1':
                 self.user_id.hide()
@@ -112,6 +115,7 @@ class Functions(QWidget):  # Окно, в котором происходят с
                 self.label_3.hide()
         elif self.site == 'tg':
             uic.loadUi('func_tg.ui', self)
+            self.setWindowTitle('TG functions')
             self.print.setReadOnly(True)
             if self.func == '1':
                 self.user_id.hide()
