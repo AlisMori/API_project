@@ -121,7 +121,7 @@ class Functions(QWidget):
                 self.message.hide()
         self.get_result.clicked.connect(self.result)
 
-    def result(self):
+    def result(self):   # Вызывает основные функции API
         if self.site == 'vk':
             if self.func == '1':
                 self.print.setText(eternal_online(self.token.text()))
@@ -140,7 +140,7 @@ class Functions(QWidget):
                 self.print.setText(get_profile_photo(self.user_id.text(), self.channel_id.text()))
 
 
-def eternal_online(token):  # добавить остановку времени
+def eternal_online(token):  # Включает вечный онлайн на аккаунт (Вы будете всегда онлайн)
     try:
         data = {'access_token': token, 'v': '5.130'}
         url = 'https://api.vk.com/method/account.setOnline?'
@@ -151,7 +151,7 @@ def eternal_online(token):  # добавить остановку времени
         return 'Error'
 
 
-def account_ban(token, user_id):
+def account_ban(token, user_id):    # Блокирует любого пользователя по его id с вашего аккаунта
     try:
         data = {'owner_id': user_id, 'access_token': token, 'v': '5.130'}
         url = 'https://api.vk.com/method/account.ban'
@@ -168,7 +168,7 @@ def account_ban(token, user_id):
         return 'Error'
 
 
-def friends(token, owner_id):
+def friends(token, owner_id):   # Просматривает 5000 друзей любого пользователя по id
     try:
         data = {'user_id': owner_id, 'order': 'name', 'count': 5000, 'fields': 'city', 'access_token': token,
                 'v': '5.130'}
@@ -184,7 +184,8 @@ def friends(token, owner_id):
         return 'Error'
 
 
-def status_get(token, user_id):
+def status_get(token, user_id):     # Выводит статус любого пользователя по id
+
     try:
         data = {'user_id': user_id, 'access_token': token, 'v': '5.130'}
         url = 'https://api.vk.com/method/status.get'
@@ -194,7 +195,7 @@ def status_get(token, user_id):
         return 'Error'
 
 
-def status_set(token, your_text):
+def status_set(token, your_text):   # Изменяет ваш статус по вашему токену
     try:
         data = {'text': your_text, 'access_token': token, 'v': '5.130'}
         url = 'https://api.vk.com/method/status.set'
@@ -207,7 +208,7 @@ def status_set(token, your_text):
 token_bot = '1772905780:AAGmVZ4xZsprfuoLiOM_dwE5Yp06DZL8qfI'
 
 
-def send_messages(channel_id, text):
+def send_messages(channel_id, text):    # Бот отправляет сообщение любому человеку, который запустил этого бота
     try:
         url = "https://api.telegram.org/bot"
         url += token_bot
@@ -219,7 +220,7 @@ def send_messages(channel_id, text):
         return 'Error'
 
 
-def get_profile_photo(user_id, channel_id):
+def get_profile_photo(user_id, channel_id):     # Бот получает и отправляет вам в телеграмм сообщение с фотографией
     try:
         url = "https://api.telegram.org/bot"
         url += token_bot
