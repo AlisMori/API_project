@@ -19,6 +19,9 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(255, 255, 255);</string>
+  </property>
   <widget class="QWidget" name="horizontalLayoutWidget">
    <property name="geometry">
     <rect>
@@ -37,6 +40,10 @@
     </property>
     <item>
      <widget class="QPushButton" name="Main_tg">
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(177, 99, 255);
+font: 10pt &quot;Times New Roman&quot;;</string>
+      </property>
       <property name="text">
        <string>Главная</string>
       </property>
@@ -47,6 +54,10 @@
       <property name="enabled">
        <bool>true</bool>
       </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(177, 99, 255);
+font: 10pt &quot;Times New Roman&quot;;</string>
+      </property>
       <property name="text">
        <string>API функции VK</string>
       </property>
@@ -56,6 +67,10 @@
      <widget class="QPushButton" name="TG_5">
       <property name="enabled">
        <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(177, 99, 255);
+font: 10pt &quot;Times New Roman&quot;;</string>
       </property>
       <property name="text">
        <string>API функции TG</string>
@@ -83,17 +98,20 @@
     <number>1</number>
    </property>
    <property name="text">
-    <string>Название</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;VK &amp;amp; TG functions &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_8">
    <property name="geometry">
     <rect>
-     <x>340</x>
+     <x>300</x>
      <y>90</y>
-     <width>141</width>
+     <width>171</width>
      <height>21</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 11pt &quot;Times New Roman&quot;;</string>
    </property>
    <property name="text">
     <string>Выберете номер функции</string>
@@ -102,11 +120,15 @@
   <widget class="QPushButton" name="function">
    <property name="geometry">
     <rect>
-     <x>340</x>
+     <x>300</x>
      <y>150</y>
      <width>75</width>
      <height>23</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(177, 99, 255);
+font: 10pt &quot;Times New Roman&quot;;</string>
    </property>
    <property name="text">
     <string>Открыть</string>
@@ -115,11 +137,15 @@
   <widget class="QComboBox" name="nums">
    <property name="geometry">
     <rect>
-     <x>340</x>
+     <x>300</x>
      <y>110</y>
      <width>69</width>
      <height>22</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(177, 99, 255);
+font: 10pt &quot;Times New Roman&quot;;</string>
    </property>
   </widget>
   <widget class="QWidget" name="verticalLayoutWidget">
@@ -134,6 +160,9 @@
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
      <widget class="QLabel" name="label_7">
+      <property name="styleSheet">
+       <string notr="true">font: 11pt &quot;Times New Roman&quot;;</string>
+      </property>
       <property name="text">
        <string>1. Отправка сообщений от бота</string>
       </property>
@@ -141,6 +170,9 @@
     </item>
     <item>
      <widget class="QLabel" name="label_9">
+      <property name="styleSheet">
+       <string notr="true">font: 11pt &quot;Times New Roman&quot;;</string>
+      </property>
       <property name="text">
        <string>2. Получение фотографии на аватарке</string>
       </property>

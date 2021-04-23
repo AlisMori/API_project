@@ -29,7 +29,8 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">background-color: rgb(232, 232, 232);</string>
+    <string notr="true">background-color: rgb(232, 232, 232);
+font: 11pt &quot;Times New Roman&quot;;</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="token">

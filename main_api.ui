@@ -7,14 +7,14 @@
     <x>0</x>
     <y>0</y>
     <width>317</width>
-    <height>318</height>
+    <height>317</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true"/>
+   <string notr="true">background-color: rgb(255, 255, 255);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="label">
@@ -32,11 +32,20 @@
     <property name="frameShape">
      <enum>QFrame::NoFrame</enum>
     </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
     <property name="lineWidth">
      <number>1</number>
     </property>
     <property name="text">
-     <string>Название</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;VK &amp;amp; TG functions &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::AutoText</enum>
+    </property>
+    <property name="scaledContents">
+     <bool>false</bool>
     </property>
    </widget>
    <widget class="QPushButton" name="VK">
@@ -47,6 +56,10 @@
       <width>261</width>
       <height>51</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(177, 99, 255);
+font: 10pt &quot;Times New Roman&quot;;</string>
     </property>
     <property name="text">
      <string>API функции VK</string>
@@ -60,6 +73,10 @@
       <width>261</width>
       <height>61</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(177, 99, 255);
+font: 10pt &quot;Times New Roman&quot;;</string>
     </property>
     <property name="text">
      <string>API функции TG</string>
@@ -79,7 +96,7 @@
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources>
-  <include location="source.qrc"/>
+  <include location="../project/source.qrc"/>
  </resources>
  <connections/>
 </ui>

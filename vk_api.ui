@@ -7,11 +7,14 @@
     <x>0</x>
     <y>0</y>
     <width>520</width>
-    <height>275</height>
+    <height>272</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(255, 255, 255);</string>
   </property>
   <widget class="QWidget" name="horizontalLayoutWidget">
    <property name="geometry">
@@ -31,6 +34,10 @@
     </property>
     <item>
      <widget class="QPushButton" name="Main_vk">
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(177, 99, 255);
+font: 10pt &quot;Times New Roman&quot;;</string>
+      </property>
       <property name="text">
        <string>Главная</string>
       </property>
@@ -41,6 +48,10 @@
       <property name="enabled">
        <bool>false</bool>
       </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(177, 99, 255);
+font: 10pt &quot;Times New Roman&quot;;</string>
+      </property>
       <property name="text">
        <string>API функции VK</string>
       </property>
@@ -48,6 +59,10 @@
     </item>
     <item>
      <widget class="QPushButton" name="TG_vk">
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(177, 99, 255);
+font: 10pt &quot;Times New Roman&quot;;</string>
+      </property>
       <property name="text">
        <string>API функции TG</string>
       </property>
@@ -74,7 +89,7 @@
     <number>1</number>
    </property>
    <property name="text">
-    <string>Название</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:400; font-style:italic;&quot;&gt;VK &amp;amp; TG functions &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
   <widget class="QWidget" name="verticalLayoutWidget">
@@ -89,6 +104,9 @@
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <widget class="QLabel" name="label_2">
+      <property name="styleSheet">
+       <string notr="true">font: 11pt &quot;Times New Roman&quot;;</string>
+      </property>
       <property name="text">
        <string>1. Включение вечного онлайна</string>
       </property>
@@ -96,6 +114,9 @@
     </item>
     <item>
      <widget class="QLabel" name="label_3">
+      <property name="styleSheet">
+       <string notr="true">font: 11pt &quot;Times New Roman&quot;;</string>
+      </property>
       <property name="text">
        <string>2. Добавление аккаунта в бан</string>
       </property>
@@ -103,6 +124,9 @@
     </item>
     <item>
      <widget class="QLabel" name="label_4">
+      <property name="styleSheet">
+       <string notr="true">font: 11pt &quot;Times New Roman&quot;;</string>
+      </property>
       <property name="text">
        <string>3. Вывод списка друзей</string>
       </property>
@@ -110,6 +134,9 @@
     </item>
     <item>
      <widget class="QLabel" name="label_5">
+      <property name="styleSheet">
+       <string notr="true">font: 11pt &quot;Times New Roman&quot;;</string>
+      </property>
       <property name="text">
        <string>4. Получение статуса пользователя</string>
       </property>
@@ -117,6 +144,9 @@
     </item>
     <item>
      <widget class="QLabel" name="label_6">
+      <property name="styleSheet">
+       <string notr="true">font: 11pt &quot;Times New Roman&quot;;</string>
+      </property>
       <property name="text">
        <string>5. Изменение статуса пользователя</string>
       </property>
@@ -129,9 +159,12 @@
     <rect>
      <x>340</x>
      <y>80</y>
-     <width>141</width>
+     <width>171</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 11pt &quot;Times New Roman&quot;;</string>
    </property>
    <property name="text">
     <string>Выберете номер функции</string>
@@ -146,6 +179,10 @@
      <height>22</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(177, 99, 255);
+font: 10pt &quot;Times New Roman&quot;;</string>
+   </property>
   </widget>
   <widget class="QPushButton" name="function">
    <property name="geometry">
@@ -155,6 +192,10 @@
      <width>75</width>
      <height>23</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(177, 99, 255);
+font: 10pt &quot;Times New Roman&quot;;</string>
    </property>
    <property name="text">
     <string>Открыть</string>

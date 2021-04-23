@@ -6,7 +6,7 @@ import requests
 from PyQt5.QtCore import QTimer
 
 
-class Main(QMainWindow):
+class Main(QMainWindow):  # Главное окно, в котором происходит выбор приложения, с которым продолжается работа
     def __init__(self):
         super().__init__()
         uic.loadUi('main_api.ui', self)
@@ -25,7 +25,7 @@ class Main(QMainWindow):
         self.close()
 
 
-class Vk(QWidget):
+class Vk(QWidget):  # Окно, в котором представлены api функции для работы с вк
     def __init__(self):
         super().__init__()
         uic.loadUi('vk_api.ui', self)
@@ -50,7 +50,7 @@ class Vk(QWidget):
         self.close()
 
 
-class Tg(QWidget):
+class Tg(QWidget):  # Окно, в котором представлены api функции для работы с тг
     def __init__(self):
         super().__init__()
         uic.loadUi('tg_api.ui', self)
@@ -75,7 +75,7 @@ class Tg(QWidget):
         self.close()
 
 
-class Functions(QWidget):
+class Functions(QWidget):  # Окно, в котором происходят сами функции
     def __init__(self, site, function):
         super().__init__()
         self.setFixedSize(400, 300)
@@ -121,7 +121,7 @@ class Functions(QWidget):
                 self.message.hide()
         self.get_result.clicked.connect(self.result)
 
-    def result(self):   # Вызывает основные функции API
+    def result(self):  # Вызывает основные функции API
         if self.site == 'vk':
             if self.func == '1':
                 self.print.setText(eternal_online(self.token.text()))
@@ -151,7 +151,7 @@ def eternal_online(token):  # Включает вечный онлайн на а
         return 'Error'
 
 
-def account_ban(token, user_id):    # Блокирует любого пользователя по его id с вашего аккаунта
+def account_ban(token, user_id):  # Блокирует любого пользователя по его id с вашего аккаунта
     try:
         data = {'owner_id': user_id, 'access_token': token, 'v': '5.130'}
         url = 'https://api.vk.com/method/account.ban'
@@ -168,7 +168,7 @@ def account_ban(token, user_id):    # Блокирует любого польз
         return 'Error'
 
 
-def friends(token, owner_id):   # Просматривает 5000 друзей любого пользователя по id
+def friends(token, owner_id):  # Просматривает 5000 друзей любого пользователя по id
     try:
         data = {'user_id': owner_id, 'order': 'name', 'count': 5000, 'fields': 'city', 'access_token': token,
                 'v': '5.130'}
@@ -184,7 +184,7 @@ def friends(token, owner_id):   # Просматривает 5000 друзей �
         return 'Error'
 
 
-def status_get(token, user_id):     # Выводит статус любого пользователя по id
+def status_get(token, user_id):  # Выводит статус любого пользователя по id
 
     try:
         data = {'user_id': user_id, 'access_token': token, 'v': '5.130'}
@@ -195,7 +195,7 @@ def status_get(token, user_id):     # Выводит статус любого �
         return 'Error'
 
 
-def status_set(token, your_text):   # Изменяет ваш статус по вашему токену
+def status_set(token, your_text):  # Изменяет ваш статус по вашему токену
     try:
         data = {'text': your_text, 'access_token': token, 'v': '5.130'}
         url = 'https://api.vk.com/method/status.set'
@@ -208,7 +208,7 @@ def status_set(token, your_text):   # Изменяет ваш статус по 
 token_bot = '1772905780:AAGmVZ4xZsprfuoLiOM_dwE5Yp06DZL8qfI'
 
 
-def send_messages(channel_id, text):    # Бот отправляет сообщение любому человеку, который запустил этого бота
+def send_messages(channel_id, text):  # Бот отправляет сообщение любому человеку, который запустил этого бота
     try:
         url = "https://api.telegram.org/bot"
         url += token_bot
@@ -220,7 +220,7 @@ def send_messages(channel_id, text):    # Бот отправляет сообщ
         return 'Error'
 
 
-def get_profile_photo(user_id, channel_id):     # Бот получает и отправляет вам в телеграмм сообщение с фотографией
+def get_profile_photo(user_id, channel_id):  # Бот получает и отправляет вам в телеграмм сообщение с фотографией
     try:
         url = "https://api.telegram.org/bot"
         url += token_bot
